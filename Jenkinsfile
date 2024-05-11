@@ -2,32 +2,27 @@ pipeline {
     agent any
 
     environment {
-        MAVEN_HOME = '/Users/gowe/Downloads/apache-maven-3.5.0'  // Specify the Maven installation directory
+        MAVEN_HOME = '/opt/apache-maven-3.9.6'
         PATH = "${MAVEN_HOME}/bin:${env.PATH}"
+        JAVA_HOME = '/Users/gowe/Library/Java/JavaVirtualMachines/corretto-18.0.2/Contents/Home'
     }
 
     stages {
         stage('Compile Stage') {
             steps {
-                script {
-                    sh 'mvn clean compile'
-                }
+                sh 'mvn clean compile'
             }
         }
 
         stage('Testing Stage') {
             steps {
-                script {
-                    sh 'mvn test'
-                }
+                sh 'mvn test'
             }
         }
 
         stage('Install') {
             steps {
-                script {
-                    sh 'mvn deploy'
-                }
+                sh 'mvn deploy'
             }
         }
     }
