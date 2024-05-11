@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent any 
 
     environment {
         MAVEN_HOME = '/opt/apache-maven-3.9.6'
@@ -8,22 +8,48 @@ pipeline {
     }
 
     stages {
-        stage('Compile Stage') {
+        stage('Clean') {
             steps {
-                sh 'mvn clean compile'
+                sh 'mvn clean'
             }
         }
 
-        stage('Testing Stage') {
+        stage('Compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+
+        stage('Test') {
             steps {
                 sh 'mvn test'
             }
         }
 
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+
         stage('Install') {
+            steps {
+                sh 'mvn install'
+            }
+        }
+
+        stage('Deploy') {
             steps {
                 sh 'mvn deploy'
             }
         }
+
+        stage('Custom Maven Command') {
+            steps {
+                sh 'mvn clean '
+            }
+        }
+
+        // Add more stages as needed...
     }
 }
