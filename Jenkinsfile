@@ -14,15 +14,19 @@ pipeline {
             }
         }
 
-        stage('Compile') {
-            steps {
-                sh 'mvn compile'
-            }
-        }
+        stage('Test and Compile') {
+            parallel {
+                stage('Compile') {
+                    steps {
+                        sh 'mvn compile'
+                    }
+                }
 
-        stage('Test') {
-            steps {
-                sh 'mvn test'
+                stage('Test') {
+                    steps {
+                        sh 'mvn test'
+                    }
+                }
             }
         }
 
