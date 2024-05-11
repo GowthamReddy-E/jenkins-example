@@ -2,7 +2,7 @@ pipeline {
     agent any 
 
     environment {
-        MAVEN_HOME = '/opt/apache-maven-3.9.6'
+        MAVEN_HOME = '/opt/apache-maven-*'
         PATH = "${MAVEN_HOME}/bin:${env.PATH}"
         JAVA_HOME = '/Users/gowe/Library/Java/JavaVirtualMachines/corretto-18.0.2/Contents/Home'
     }
