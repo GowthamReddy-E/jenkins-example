@@ -1,29 +1,31 @@
 pipeline {
     agent any
 
-    stages {
-        stage ('Compile Stage') {
+    environment {
+        MAVEN_HOME = '/Users/gowe/Downloads/apache-maven-3.5.0'  // Specify the Maven installation directory
+        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
+    }
 
+    stages {
+        stage('Compile Stage') {
             steps {
-                withMaven(maven : 'maven_3_5_0') {
+                script {
                     sh 'mvn clean compile'
                 }
             }
         }
 
-        stage ('Testing Stage') {
-
+        stage('Testing Stage') {
             steps {
-                withMaven(maven : 'maven_3_5_0') {
+                script {
                     sh 'mvn test'
                 }
             }
         }
 
-
-        stage ('Deployment Stage') {
+        stage('Install') {
             steps {
-                withMaven(maven : 'maven_3_5_0') {
+                script {
                     sh 'mvn deploy'
                 }
             }
